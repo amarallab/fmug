@@ -1,6 +1,6 @@
 # Find My Understudied Genes
 
-This repository contains the code to generate the Find My Understudied Genes app for Windows, iOS and macOS platforms.
+This repository contains the code to generate the Find My Understudied Genes app for Windows, iOS and macOS platforms. Pre-compiled and installable versions of FMUG can be downloaded at [fmug.amaral.northwestern.edu](https://fmug.amaral.northwestern.edu/).
 
 If you are looking for the code and data for the accompanying manuscript for FMUG, go to [github.com/amarallab/fmug_analysis](https://github.com/amarallab/fmug_analysis).
 
