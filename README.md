@@ -22,6 +22,11 @@ update the database version (currently, 1.4) and run the following in a terminal
 To generate the binary using this code, please refer to the Flutter documentation at [flutter.dev](https://flutter.dev).
 
 
+## Citing FMUG
+
+If you use FMUG in your work, please cite our [bioRxiv pre-print](https://www.biorxiv.org/content/10.1101/2023.02.28.530483v1).
+
+Reese Anthony Keith Richardson, Heliodoro Tejedor Navarro, Luis A. Nunes Amaral, Thomas Stoeger. Data-driven design of a tool to promote the investigation of understudied genes. bioRxiv 2023.02.28.530483; doi: [10.1101/2023.02.28.530483](https://doi.org/10.1101/2023.02.28.530483)
 
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 
