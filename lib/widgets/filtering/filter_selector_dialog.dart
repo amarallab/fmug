@@ -10,7 +10,7 @@ import '/widgets/width_Aware_widget.dart';
 
 typedef FilterColumnCallback = void Function(FilterColumn, bool);
 
-enum ListSelectableItemType { header, selectable }
+enum ListSelectableItemType { header, selectable, disabled }
 
 class ListSelectableItem<T> {
   ListSelectableItemType type;
@@ -23,8 +23,10 @@ class ListSelectableItem<T> {
     return ListSelectableItem(ListSelectableItemType.header, text, null);
   }
 
-  factory ListSelectableItem.selectable(T column) {
-    return ListSelectableItem(ListSelectableItemType.selectable, null, column);
+  factory ListSelectableItem.selectable(T column, bool isDisabled) {
+    return isDisabled
+        ? ListSelectableItem(ListSelectableItemType.disabled, null, column)
+        : ListSelectableItem(ListSelectableItemType.selectable, null, column);
   }
 }
 
@@ -97,7 +99,7 @@ class _FilterSelectorDialogState extends State<FilterSelectorDialog> {
       Consumer<FilterColumnsProvider>(builder: (_, filterColumnsProvider, __) {
         final allValues = filterColumnsProvider.filterColumns
             .where((column) => column.commonName.isNotEmpty)
-            .where((column) => !widget.excludedColumns.contains(column))
+            // .where((column) => !widget.excludedColumns.contains(column))
             .toList();
         allValues.sort((a, b) => a.commonName.compareTo(b.commonName));
 
@@ -109,9 +111,11 @@ class _FilterSelectorDialogState extends State<FilterSelectorDialog> {
 
         List<ListSelectableItem> values = [
           ListSelectableItem.text("Default"),
-          ...defaultValues.map((c) => ListSelectableItem.selectable(c)),
+          ...defaultValues.map((c) => ListSelectableItem.selectable(
+              c, widget.excludedColumns.contains(c))),
           ListSelectableItem.text("Advanced"),
-          ...extendedValues.map((c) => ListSelectableItem.selectable(c))
+          ...extendedValues.map((c) => ListSelectableItem.selectable(
+              c, widget.excludedColumns.contains(c)))
         ];
 
         return SizedBox(
@@ -159,6 +163,17 @@ class _FilterSelectorDialogState extends State<FilterSelectorDialog> {
                                                 _selectedColumn = selectable;
                                               });
                                             }));
+                                  case ListSelectableItemType.disabled:
+                                    final selectable = value.selectable!;
+                                    return Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            color: null),
+                                        child: ListTile(
+                                            title: Text(selectable.commonName),
+                                            selected: false,
+                                            textColor: Colors.grey));
                                 }
                               })),
                       const SizedBox(height: 8),

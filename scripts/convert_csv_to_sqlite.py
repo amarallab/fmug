@@ -148,8 +148,8 @@ def main(main_csv_file, columns_csv_file, database, print_flutter_pairs, overwri
             params = [x for x in line]
             # if len(params) == 10:
             #     params += [None]
-            column_name, common_name, dtype, display, is_filter_factor, add_before_log_transform, factor_class, true_text, false_text, default_value, tooltip_text = params
-            if is_filter_factor != "TRUE":
+            column_name, enabled, common_name, dtype, display, is_filter_factor, add_before_log_transform, factor_class, true_text, false_text, default_value, tooltip_text = params
+            if is_filter_factor != "TRUE" or enabled == "FALSE":
                 continue
             default_value = 1 if default_value == "TRUE" else 0
             column_name = convert_name(column_name)
