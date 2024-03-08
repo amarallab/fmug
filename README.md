@@ -24,9 +24,9 @@ To generate the binary using this code, please refer to the Flutter documentatio
 
 ## Citing FMUG
 
-If you use FMUG in your work, please cite our [bioRxiv pre-print](https://www.biorxiv.org/content/10.1101/2023.02.28.530483v1).
+If you use FMUG in your work, please cite our [paper in eLife](https://doi.org/10.7554/eLife.93429).
 
-Reese Anthony Keith Richardson, Heliodoro Tejedor Navarro, Luis A. Nunes Amaral, Thomas Stoeger. Data-driven design of a tool to promote the investigation of understudied genes. bioRxiv 2023.02.28.530483; doi: [10.1101/2023.02.28.530483](https://doi.org/10.1101/2023.02.28.530483)
+Reese Anthony Keith Richardson, Heliodoro Tejedor Navarro, Luis A. Nunes Amaral, Thomas Stoeger. Meta-Research: understudied genes are lost in a leaky pipeline between genome-wide assays and reporting of results *eLife* **12**:RP93429; doi: [10.7554/eLife.93429](https://doi.org/10.7554/eLife.93429)
 
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 
