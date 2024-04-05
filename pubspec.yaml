@@ -17,7 +17,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+2
+version: 1.2.0+14
 
 environment:
   sdk: '>=2.18.2 <3.0.0'
@@ -36,15 +36,19 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+
+  # Others
   csv: ^5.0.1
   path_provider: ^2.0.11
+  path_provider_foundation: 2.2.3
   collection: ^1.16.0
   provider: ^6.0.4
   path: ^1.8.2
   json_annotation: ^4.7.0
-  file_picker: ^5.2.5
-  flutter_file_dialog: ^2.3.2
+  flutter_file_dialog:  3.0.1 # ^2.3.2
   url_launcher: ^6.1.7
+  url_launcher_ios: 6.1.2
+  file_picker: 5.2.5
   material_design_icons_flutter: ^6.0.7096
   intl: ^0.17.0
   sqflite_common_ffi: ^2.2.1+1
@@ -118,7 +122,7 @@ msix_config:
   display_name: Find My Understudied Genes
   publisher_display_name: Northwestern University (No distribute)
   identity_name: edu.northwestern.amaral.FMUG
-  msix_version: 1.0.0.10
+  msix_version: 1.2.0.14
   logo_path: assets/icons/logo.png
   certificate_path: windows_certs/NOVALIDCERTIFICATE.pfx
   certificate_password: ""

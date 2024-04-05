@@ -23,7 +23,7 @@ class Welcome extends StatelessWidget {
         const SizedBox(height: 20),
         const Text.rich(TextSpan(
             text:
-                "Find My Understudied Genes (FMUG) is a rationally-designed tool to helps biologists identify understudied genes and characterize their tractability for future research.")),
+                "Find My Understudied Genes (FMUG) is a rationally-designed tool to help biologists identify understudied genes and characterize their tractability for future research.")),
         const SizedBox(height: 20),
         const Text.rich(
           TextSpan(
@@ -47,7 +47,8 @@ class Welcome extends StatelessWidget {
         const SizedBox(height: 20),
         const Text.rich(TextSpan(children: <TextSpan>[
           TextSpan(
-              text: "To continue, select your genes of interest by using the "),
+              text:
+                  "To continue, select your human genes of interest by using the "),
           TextSpan(
               text: "genes", style: TextStyle(fontWeight: FontWeight.bold)),
           TextSpan(

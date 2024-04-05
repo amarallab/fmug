@@ -12,7 +12,7 @@ More information is available at [fmug.amaral.northwestern.edu](https://fmug.ama
 ## Generate MySQL database
 
 The `scripts` folder contains the `convert_csv_to_sqllite.py` script that generates the genes information MySQL database from the CSV files. To create it, 
-update the database version (currently, 1.4) and run the following in a terminal:
+update the database version (currently, 1.8) and run the following in a terminal:
 
     $ python scripts/convert_csv_to_sqlite.py --main data/main_table.csv --columns data/main_table_columns.csv --sqlite assets/db.sqlite --overwrite --dbversion x.x
 
