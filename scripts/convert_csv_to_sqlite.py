@@ -70,7 +70,11 @@ source_types = {
     "loss_of_function_intolerant": bool,
     "previously_patented": bool,
     "normalized_gravy": float,
-    "druggable": bool
+    "druggable": bool,
+    "n_pubs_gene2pubmed":int,
+    "evolution_constrained":bool,
+    "uncharacterized":bool,
+    "n_pdb_entries":int
 
     # "global_rna_rank": float,
     # "de": bool,
@@ -94,7 +98,8 @@ CAN_BE_NONE = {
     "n_mouse_pubs",
     "n_rat_pubs",
     "loss_of_function_intolerant",
-    "gene_length"
+    "gene_length",
+    "evolution_constrained"
 }
 MULTIVALUES = {"synonyms", "dbxrefs"}
 
@@ -270,6 +275,7 @@ def main(main_csv_file, columns_csv_file, database, print_flutter_pairs, overwri
                 column, type_ = relations[header]
                 columns.append(column)
 
+                #print(f"I dont know so {header}{column}{type_}")
                 if header in CAN_BE_NONE:
                     if len(value) == 0:
                         values.append("NULL")

@@ -4,7 +4,7 @@ import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 import 'app.dart';
 
-void main() async {
+Future<void> main() async {
   if (Platform.isWindows || Platform.isLinux) {
     sqfliteFfiInit();
   }

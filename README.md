@@ -1,40 +1,98 @@
-# Find My Understudied Genes
+# Find my understudied genes
 
-This repository contains the code to generate the Find My Understudied Genes app for Windows, iOS and macOS platforms. Pre-compiled and installable versions of FMUG can be downloaded at [fmug.amaral.northwestern.edu](https://fmug.amaral.northwestern.edu/).
+Identifying Genes of Promise Tool.
 
-If you are looking for the code and data for the accompanying manuscript for FMUG, go to [github.com/amarallab/fmug_analysis](https://github.com/amarallab/fmug_analysis).
+# How to prepare a Windows to create the package
 
-Find My Understudied Genes (**FMUG**) is a data-driven tool to helps biologists identify understudied genes and characterize their tractability for future research.
+Install Visual Studio Code (check architecture and User/System Installer).
+Install also these extensions:
+ - Dart
+ - Flutter
 
-More information is available at [fmug.amaral.northwestern.edu](https://fmug.amaral.northwestern.edu/).
+Install GitHub Desktop (or something similar) and pull the code at the default folder.
+
+Note: Change to the flutter-app branch.
+
+Open in VSCode the folder promising_genes/find_my_inderstudied_genes
+
+You will be asked to install the Flutter SDK. Select "Windows" and look for "Download and install" folder. It will download a file called flutter_windows_3.7.0-stable.zip
+
+IMPORTANT: The flutter windows builder in new versions is changing the destination folder to
+           add the platform name (x64), but the msix is not able to deal with this, so...
+           DON'T INSTALL NEWER VERSION OF FLUTTER!   
+
+Install (unzip and copy) flutter in the folder c:\src\flutter (it cannot have spaces!)
+
+Close VSCode and open it again. When the flutter extension asks for the Flutter SDK, click on "Locate SDK..." and select the previous folder.
+
+Then, click on "Run 'pub get'".
+
+This step will warn us that we need to run this on the terminal:
+
+    $ start ms-settings:developers
+
+And activate: "Install apps from any source, including loose files."
+
+Close and open again the VSCode.
+
+To create an app for Windows, you will need to install the Visual Studio (without Code). The student version (Free) is enough. Select the "Universal Windows Platform Development" and "Desktop development with C++" and install.
+
+You could check that everything works running on VSCode Terminal:
+
+    $ flutter doctor
+
+The only error that should appear is "Cannot find chrome".
+
+Then, remove (or rename) the folder "windows" and create a new platform:
+
+    $ flutter create --platforms windows .
+
+Now, you will be able to compile and run the windows app.
+
+    $ flutter build windows
 
 
-## Generate MySQL database
+To run the previous build, you must download the SQLite DLL from https://www.sqlite.org/download.html, something like: sqlite-dll-win-x86-3450100.zip
 
-The `scripts` folder contains the `convert_csv_to_sqllite.py` script that generates the genes information MySQL database from the CSV files. To create it, 
-update the database version (currently, 1.8) and run the following in a terminal:
+Uncompress the file and copy the file "sqlite3.dll" into:
 
-    $ python scripts/convert_csv_to_sqlite.py --main data/main_table.csv --columns data/main_table_columns.csv --sqlite assets/db.sqlite --overwrite --dbversion x.x
+    build/windows/x86/runner/Release 
 
+# How to create the package for the store
 
-## Generate the binary
+$ python scripts/convert_csv_to_sqlite.py --main data/main_table.csv --columns data/main_table_columns.csv --sqlite assets/db.sqlite --overwrite --dbversion 1.xx
 
-To generate the binary using this code, please refer to the Flutter documentation at [flutter.dev](https://flutter.dev).
+**Note:** The version must be different when the db is changed. The current version is written at `/lib/providers/database_connector_provider.dart:14`.
 
+**Note:** If you change the gene columns, use the `--print-flutter-pairs` attribute and copy the text written in the console to the file `/lib/model/gene_columns.dart` (use the same format as the current file).
 
-## Citing FMUG
+Run `flutter build windows` in VSCode
 
-If you use FMUG in your work, please cite our [paper in eLife](https://doi.org/10.7554/eLife.93429).
+## Create Windows Package (OUTDATED)
 
-Reese Anthony Keith Richardson, Heliodoro Tejedor Navarro, Luis A. Nunes Amaral, Thomas Stoeger. Meta-Research: understudied genes are lost in a leaky pipeline between genome-wide assays and reporting of results *eLife* **12**:RP93429; doi: [10.7554/eLife.93429](https://doi.org/10.7554/eLife.93429)
+Update at the `pubspec.yaml` the version value at `msix_config/msix_version`.
 
-[![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
+Run at the terminal:
 
-This work is licensed under a
-[Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
+    $ flutter pub run msix:create
 
-[![CC BY-NC-SA 4.0][cc-by-nc-sa-image]][cc-by-nc-sa]
+The package will appear at: `build/windows/runner/Release` and called `find_my_understudied_genes.msix`.
 
-[cc-by-nc-sa]: http://creativecommons.org/licenses/by-nc-sa/4.0/
-[cc-by-nc-sa-image]: https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png
-[cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
+# How to create an installer using Inno
+
+Open Inno Setup Compiler, change the version in the header of CreateWindowsBinary.iss (using the same version shown in pubspec.yaml) and hit Run. Once finished, the .exe will be found in fmug/find_my_understudied_genes/InnoSetup/Output.
+
+# How to create a new version release on GitHub
+
+To release the windows installer, go to [github.com/amarallab/fmug](https://github.com/amarallab/fmug) (no this one) and click on Releases.
+
+Then, click on "Draft a new release":
+
+- Choose a tag and write "v1.x.x.x-windows". This will create a tag using the same name.
+- The name must be "1.x.x.x-windows" (without the 'v')
+- Write the changes (same as the App Store)
+- Rename the InnoSetup exe to: InstallFMUG-1.x.x.x-windows.exe
+- Add the "exe" generated
+- Mark: Set as the latest release
+
+And publish!

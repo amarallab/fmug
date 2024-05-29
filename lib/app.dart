@@ -58,60 +58,59 @@ class FindMyUnderstudiedGenesApp extends StatelessWidget {
         useMaterial3: true);
 
     return MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => DatabaseConnectorProvider()),
-          ChangeNotifierProxyProvider<DatabaseConnectorProvider,
-                  FilterColumnsProvider>(
-              create: (_) => FilterColumnsProvider(),
-              update: (_, databaseConnectorProvider, filterColumnsProvider) =>
-                  filterColumnsProvider!..update(databaseConnectorProvider)),
-          ChangeNotifierProvider<FilterListProvider>(
-              create: (_) => FilterListProvider()),
-          ChangeNotifierProxyProvider<DatabaseConnectorProvider,
-                  GeneSelectionReviewProvider>(
-              create: (_) => GeneSelectionReviewProvider(),
-              update: (_, databaseConnectorProvider,
-                      genesSelectionReviewProvider) =>
-                  genesSelectionReviewProvider!
-                    ..update(databaseConnectorProvider)),
-          ChangeNotifierProxyProvider<DatabaseConnectorProvider,
-                  GeneSelectorBulkProvider>(
-              create: (_) => GeneSelectorBulkProvider(),
-              update:
-                  (_, databaseConnectorProvider, genesSelectorBulkProvider) =>
-                      genesSelectorBulkProvider!
-                        ..update(databaseConnectorProvider)),
-          ChangeNotifierProxyProvider<DatabaseConnectorProvider,
-                  GeneSelectorProvider>(
-              create: (_) => GeneSelectorProvider(),
-              update: (_, databaseConnectorProvider, genesSelectorProvider) =>
-                  genesSelectorProvider!..update(databaseConnectorProvider)),
-          ChangeNotifierProxyProvider2<DatabaseConnectorProvider,
-                  FilterListProvider, FilteredResultProvider>(
-              create: (_) => FilteredResultProvider(),
-              update: (_, databaseConnectorProvider, filterListProvider,
-                      filteredResultProvider) =>
-                  filteredResultProvider!
-                    ..update(databaseConnectorProvider)
-                    ..updateFilterResults(filterListProvider.filters))
-        ],
-        child: MaterialApp(
-            title: "Find my understudied genes",
-            debugShowCheckedModeBanner: false,
-            theme: theme,
-            darkTheme: darkTheme,
-            home: Consumer<DatabaseConnectorProvider>(
-                builder: (_, databaseConnectorProvider, __) {
-              switch (databaseConnectorProvider.status) {
-                case DatabaseConnectorStatus.unknown:
-                case DatabaseConnectorStatus.loading:
-                  return const CheckDataConnectorLoading();
-                case DatabaseConnectorStatus.error:
-                  return const CheckDataConnectorError();
-                case DatabaseConnectorStatus.loaded:
-                case DatabaseConnectorStatus.rebuilding:
-                  return const Root();
-              }
-            })));
+      providers: [
+        ChangeNotifierProvider(create: (_) => DatabaseConnectorProvider()),
+        ChangeNotifierProxyProvider<DatabaseConnectorProvider,
+                FilterColumnsProvider>(
+            create: (_) => FilterColumnsProvider(),
+            update: (_, databaseConnectorProvider, filterColumnsProvider) =>
+                filterColumnsProvider!..update(databaseConnectorProvider)),
+        ChangeNotifierProvider<FilterListProvider>(
+            create: (_) => FilterListProvider()),
+        ChangeNotifierProxyProvider<DatabaseConnectorProvider,
+                GeneSelectionReviewProvider>(
+            create: (_) => GeneSelectionReviewProvider(),
+            update:
+                (_, databaseConnectorProvider, genesSelectionReviewProvider) =>
+                    genesSelectionReviewProvider!
+                      ..update(databaseConnectorProvider)),
+        ChangeNotifierProxyProvider<DatabaseConnectorProvider,
+                GeneSelectorBulkProvider>(
+            create: (_) => GeneSelectorBulkProvider(),
+            update: (_, databaseConnectorProvider, genesSelectorBulkProvider) =>
+                genesSelectorBulkProvider!..update(databaseConnectorProvider)),
+        ChangeNotifierProxyProvider<DatabaseConnectorProvider,
+                GeneSelectorProvider>(
+            create: (_) => GeneSelectorProvider(),
+            update: (_, databaseConnectorProvider, genesSelectorProvider) =>
+                genesSelectorProvider!..update(databaseConnectorProvider)),
+        ChangeNotifierProxyProvider2<DatabaseConnectorProvider,
+                FilterListProvider, FilteredResultProvider>(
+            create: (_) => FilteredResultProvider(),
+            update: (_, databaseConnectorProvider, filterListProvider,
+                    filteredResultProvider) =>
+                filteredResultProvider!
+                  ..update(databaseConnectorProvider)
+                  ..updateFilterResults(filterListProvider.filters))
+      ],
+      child: MaterialApp(
+          title: "Find my understudied genes",
+          debugShowCheckedModeBanner: false,
+          theme: theme,
+          darkTheme: darkTheme,
+          home: Consumer<DatabaseConnectorProvider>(
+              builder: (_, databaseConnectorProvider, __) {
+            switch (databaseConnectorProvider.status) {
+              case DatabaseConnectorStatus.unknown:
+              case DatabaseConnectorStatus.loading:
+                return const CheckDataConnectorLoading();
+              case DatabaseConnectorStatus.error:
+                return const CheckDataConnectorError();
+              case DatabaseConnectorStatus.loaded:
+              case DatabaseConnectorStatus.rebuilding:
+                return const Root();
+            }
+          })),
+    );
   }
 }

@@ -11,7 +11,7 @@ import 'package:sqflite_common/utils/utils.dart' as utils;
 
 enum DatabaseConnectorStatus { unknown, loading, loaded, rebuilding, error }
 
-const _currentDbVersion = "1.8";
+const _currentDbVersion = "1.9";
 
 class DatabaseConnectorProvider with ChangeNotifier {
   DatabaseConnectorStatus _status = DatabaseConnectorStatus.unknown;
